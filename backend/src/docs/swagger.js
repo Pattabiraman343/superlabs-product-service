@@ -11,7 +11,10 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000",
+        url:
+          process.env.NODE_ENV === "production"
+            ? "https://superlabs-product-service.onrender.com"
+            : "http://localhost:5000",
       },
     ],
   },
