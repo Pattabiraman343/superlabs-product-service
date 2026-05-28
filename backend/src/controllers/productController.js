@@ -102,7 +102,7 @@ export const getProducts = async (req, res) => {
           ],
         },
       });
-  
+      console.log(products);
       res.json({
         success: true,
         page,
