@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
-});
+    baseURL: "https://superlabs-product-service.onrender.com/api",});
 
 export default API;
