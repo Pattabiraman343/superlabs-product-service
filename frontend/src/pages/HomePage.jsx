@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import API from "../services/api";
 
+import "./HomePage.css";
+
 function HomePage() {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
@@ -50,14 +52,14 @@ function HomePage() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Product Listing</h1>
+    <div className="home-container">
+      <h1 className="home-title">
+        Product Listing
+      </h1>
 
       <form
         onSubmit={handleSearch}
-        style={{
-          marginBottom: "20px",
-        }}
+        className="search-form"
       >
         <input
           type="text"
@@ -66,18 +68,12 @@ function HomePage() {
           onChange={(e) =>
             setSearch(e.target.value)
           }
-          style={{
-            padding: "10px",
-            width: "300px",
-          }}
+          className="search-input"
         />
 
         <button
           type="submit"
-          style={{
-            marginLeft: "10px",
-            padding: "10px",
-          }}
+          className="btn search-btn"
         >
           Search
         </button>
@@ -85,69 +81,56 @@ function HomePage() {
         <button
           type="button"
           onClick={handleReset}
-          style={{
-            marginLeft: "10px",
-            padding: "10px",
-          }}
+          className="btn reset-btn"
         >
           Reset
         </button>
       </form>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(3, 1fr)",
-          gap: "20px",
-        }}
-      >
+      <div className="product-grid">
         {products.map((product) => (
           <div
             key={product.id}
-            style={{
-              border: "1px solid #ccc",
-              padding: "15px",
-              borderRadius: "10px",
-            }}
+            className="product-card"
           >
             <img
               src={product.images[0]}
               alt={product.name}
-              width="100%"
-              height="200"
+              className="product-image" style={{width:"330px",height:"200px"}}
             />
 
-            <h3>{product.name}</h3>
+            <div className="product-content">
+              <h3 className="product-name">
+                {product.name}
+              </h3>
 
-            <p>₹ {product.price}</p>
+              <p className="product-price">
+                ₹ {product.price}
+              </p>
 
-            <Link
-              to={`/product/${product.slug}`}
-            >
-              View Product
-            </Link>
+              <Link
+                to={`/product/${product.slug}`}
+                className="view-btn"
+              >
+                View Product
+              </Link>
+            </div>
           </div>
         ))}
       </div>
 
-      <div
-        style={{
-          marginTop: "30px",
-          display: "flex",
-          gap: "10px",
-        }}
-      >
+      <div className="pagination">
         <button
           disabled={page === 1}
           onClick={() =>
             setPage(page - 1)
           }
+          className="page-btn"
         >
           Previous
         </button>
 
-        <span>
+        <span className="page-text">
           Page {page} of {totalPages}
         </span>
 
@@ -156,6 +139,7 @@ function HomePage() {
           onClick={() =>
             setPage(page + 1)
           }
+          className="page-btn"
         >
           Next
         </button>

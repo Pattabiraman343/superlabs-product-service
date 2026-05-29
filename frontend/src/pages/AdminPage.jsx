@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import "./AdminPage.css";
 import API from "../services/api";
 
 function AdminPage() {
@@ -120,18 +120,14 @@ function AdminPage() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Admin Product Management</h1>
-
+    <div className="admin-container">
+      <h1 className="admin-title">
+        Admin Product Management
+      </h1>
+  
       <form
         onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          maxWidth: "500px",
-          marginBottom: "40px",
-        }}
+        className="admin-form"
       >
         <input
           type="text"
@@ -139,134 +135,154 @@ function AdminPage() {
           placeholder="Product Name"
           value={formData.name}
           onChange={handleChange}
+          className="admin-input"
         />
-
+  
         <input
           type="text"
           name="slug"
           placeholder="Slug"
           value={formData.slug}
           onChange={handleChange}
+          className="admin-input"
         />
-
+  
         <textarea
           name="description"
           placeholder="Description"
           value={formData.description}
           onChange={handleChange}
+          className="admin-textarea"
         />
-
+  
         <input
           type="number"
           name="price"
           placeholder="Price"
           value={formData.price}
           onChange={handleChange}
+          className="admin-input"
         />
-
+  
         <input
           type="text"
           name="sku"
           placeholder="SKU"
           value={formData.sku}
           onChange={handleChange}
+          className="admin-input"
         />
-
+  
         <input
           type="text"
           name="image"
           placeholder="Image URL"
           value={formData.image}
           onChange={handleChange}
+          className="admin-input"
         />
-
+  
         <input
           type="text"
           name="category"
           placeholder="Category"
           value={formData.category}
           onChange={handleChange}
+          className="admin-input"
         />
-
+  
         <input
           type="text"
           name="brand"
           placeholder="Brand"
           value={formData.brand}
           onChange={handleChange}
+          className="admin-input"
         />
-
+  
         <input
           type="number"
           name="stock"
           placeholder="Stock"
           value={formData.stock}
           onChange={handleChange}
+          className="admin-input"
         />
-
-        <button type="submit">
-          {editingId ? "Update Product" : "Create Product"}
+  
+        <button
+          type="submit"
+          className="submit-btn"
+        >
+          {editingId
+            ? "Update Product"
+            : "Create Product"}
         </button>
       </form>
-
-      <h2>Product List</h2>
-
-      <table
-        border="1"
-        cellPadding="10"
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-        }}
-      >
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Stock</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              <td>
-                <img
-                  src={product.images[0]}
-                  alt={product.name}
-                  width="80"
-                />
-              </td>
-
-              <td>{product.name}</td>
-
-              <td>₹ {product.price}</td>
-
-              <td>{product.category}</td>
-
-              <td>{product.stock}</td>
-
-              <td>
-                <button
-                  onClick={() => handleEdit(product)}
-                >
-                  Edit
-                </button>
-
-                <button
-                  onClick={() => handleDelete(product.id)}
-                  style={{ marginLeft: "10px" }}
-                >
-                  Delete
-                </button>
-              </td>
+  
+      <h2 className="product-list-title">
+        Product List
+      </h2>
+  
+      <div className="table-wrapper">
+        <table className="product-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Stock</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+  
+          <tbody>
+            {products.map((product) => (
+              <tr key={product.id}>
+                <td>
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                    className="product-image"
+                  />
+                </td>
+  
+                <td>{product.name}</td>
+  
+                <td>
+                  ₹ {product.price}
+                </td>
+  
+                <td>
+                  {product.category}
+                </td>
+  
+                <td>{product.stock}</td>
+  
+                <td>
+                  <button
+                    onClick={() =>
+                      handleEdit(product)
+                    }
+                    className="action-btn edit-btn"
+                  >
+                    Edit
+                  </button>
+  
+                  <button
+                    onClick={() =>
+                      handleDelete(product.id)
+                    }
+                    className="action-btn delete-btn"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
